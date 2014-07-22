@@ -10,6 +10,7 @@ int main(int argc, char* argv[])
   printf("size of yo int: %u\n", sizeof(int));
   printf("size of yo areas (int[]): %u\n", sizeof(areas));
   printf("number of ints in yo areas: %u\n", sizeof(areas) / sizeof(int));
+  printf("yo first area is %d, yo 2nd %d\n", areas[0], areas[1]);
 
   printf("size of yo char: %u\n", sizeof(char));
   printf("size of yo name (char[]): %u\n", sizeof(name));
