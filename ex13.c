@@ -13,33 +13,33 @@ int main(int argc, char* argv[]){
     switch(letter) {
       case 'a':
       case 'A':
-        printf("%d: 'A'\n", i);
+        printf("%d: 'A' %d\n", i, letter);
         break;
 
       case 'e':
       case 'E':
-        printf("%d: 'E'\n", i);
+        printf("%d: 'E' %d\n", i, letter);
         break;
 
       case 'i':
       case 'I':
-        printf("%d: 'I'\n", i);
+        printf("%d: 'I' %d\n", i, letter);
         break;
 
       case 'o':
       case 'O':
-        printf("%d: 'o'\n", i);
+        printf("%d: 'o' %d\n", i, letter);
         break;
 
       case 'u':
       case 'U':
-        printf("%d: 'u'\n", i);
+        printf("%d: 'u' %d\n", i, letter);
         break;
 
       case 'y':
       case 'Y':
         if(i > 2){
-          printf("%d: 'Y'\n", i);
+          printf("%d: 'Y' %d\n", i, letter);
         }
         break;
 
