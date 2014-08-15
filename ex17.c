@@ -98,6 +98,9 @@ void Database_set(struct Connection *conn, int id, const char* name, const char*
 
   addr->set = 1;
   //bug here
+  //does not buffer overflow because of max_data, but if
+  //name exceeds max_data in length addr->name will not be
+  //null terminated
   char* res = strncpy(addr->name, name, MAX_DATA);
   //demonstrate bug?
   if(!res) die("Name copy failed");
