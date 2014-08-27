@@ -36,7 +36,13 @@ void stack_push(struct entry* stack, struct entry* new_item){
 }
 
 struct entry* stack_pop(struct entry* stack){
-  return stack->prev;
+  struct entry temp = {.item = stack->prev->item, .prev = stack->prev->prev};
+  struct entry* ret = stack->prev;
+  ret->item = stack->item;
+  ret->prev = NULL;
+  stack->item = temp.item;
+  stack->prev = temp.prev;
+  return ret;
 }
 
 int main(int argc, char* argv[]){
@@ -51,6 +57,21 @@ int main(int argc, char* argv[]){
   stack_push(mystack, new_entry(15));
   stack_push(mystack, new_entry(25402));
 
+  printf("the stack\n");
+  stack_print(mystack);
+  printf("pop top\n");
+  destroy_stack(stack_pop(mystack));
+  stack_print(mystack);
+  printf("pop again\n");
+  destroy_stack(stack_pop(mystack));
+  stack_print(mystack);
+  printf("print again\n");
+  stack_print(mystack);
+  stack_push(mystack, new_entry(1024));
+  printf("push\n");
+  stack_print(mystack);
+  stack_push(mystack, new_entry(192));
+  printf("push\n");
   stack_print(mystack);
   destroy_stack(mystack);
 
