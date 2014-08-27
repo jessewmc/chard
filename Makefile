@@ -13,5 +13,4 @@ $(BIN)%: ./%.c
 
 
 clean:
-	rm -f ex[0-9]
-	rm -f ex1[0-9]
+	rm $(LIST)
