@@ -37,8 +37,8 @@ int* bubble_sort(int* numbers, int count, compare_cb cmp){
   return target;
 }
 
-int sorted_order(int a, int b){
-  return a - b;
+int sorted_order(int arrdv, int b){
+  return arrdv - b;
 }
 
 int reverse_order(int a, int b){
@@ -64,6 +64,14 @@ void test_sorting(int* numbers, int count, compare_cb cmp){
   }
   printf("\n");
   free(sorted);
+
+  unsigned char* data = (unsigned char*) cmp;
+
+  for(i = 0; i < 25; i++){
+    printf("%02x:", data[i]);
+  }
+
+  printf("\n");
 }
 
 int main(int argc, char* argv[]){
