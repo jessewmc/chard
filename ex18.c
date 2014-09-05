@@ -14,9 +14,39 @@ void die(const char* message){
 
 typedef int (*compare_cb)(int a, int b);
 
+typedef int* (*sort_cb)(int* numbers, int count, compare_cb cmp);
+
+int* merge_sort(int* numbers, int count, compare_cb cmp){
+  if (sizeof(numbers) <= sizeof(int)) return numbers;
+
+  int split = sizeof(numbers)/sizeof(int)/2;
+
+  int i = 0;
+  int* left = malloc(sizeof(int) * split);
+  int* right = malloc(sizeof(int) * (sizeof(numbers)-split));
+
+  for(i = 0; i < split; i++){
+   left[i] = numbers[i];
+  }
+  for(i = split; i < sizeof(numbers); i++){
+    right[i - split] = numbers[i];
+  }
+
+  int* leftr = merge_sort(left, split, cmp);
+  int* rightr = merge_sort(right, sizeof(numbers) - split, cmp);
+
+  free(left);
+  free(right);
+
+  int* result = merge(leftr, rightr);
+
+  free(leftr);
+  free(rightr);
+  return result;
+}
+
 int* bubble_sort(int* numbers, int count, compare_cb cmp){
   int temp = 0;
-  int i = 0;
   int j = 0;
   int* target = malloc(count * sizeof(int));
 
@@ -53,9 +83,9 @@ int strange_order(int a, int b){
   }
 }
 
-void test_sorting(int* numbers, int count, compare_cb cmp){
+void test_sorting(int* numbers, int count, sort_cb srt, compare_cb cmp){
   int i = 0;
-  int* sorted = bubble_sort(numbers, count, cmp);
+  int* sorted = srt(numbers, count, cmp);
 
   if(!sorted) die("Failed to sort as requested");
 
@@ -90,9 +120,9 @@ int main(int argc, char* argv[]){
     numbers[i] = atoi(inputs[i]);
   }
 
-  test_sorting(numbers, count, sorted_order);
-  test_sorting(numbers, count, reverse_order);
-  test_sorting(numbers, count, strange_order);
+  test_sorting(numbers, count, bubble_sort, sorted_order);
+  test_sorting(numbers, count, bubble_sort, reverse_order);
+  test_sorting(numbers, count, bubble_sort, strange_order);
 
   free(numbers);
 
